@@ -1,0 +1,39 @@
+﻿@using BankRegistry_MVC.Models
+@model ViewModelItem
+@{
+    ViewBag.Title = "NewContactPerson";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="table table-hover">
+    <tbody>
+        @foreach (var cPM in Model.ContactPersonModels)
+        {
+        <tr>
+            <td><p class="lead">@cPM.FirstName</p></td>
+            <td><p class="lead">@cPM.LastName</p></td>
+            <td><p class="lead">@cPM.DateOfBirth.Day/@cPM.DateOfBirth.Month/@cPM.DateOfBirth.Year</p></td>
+            <td><p class="lead">@cPM.Position.Name</p></td> 
+            <td class="btnRemove">@Html.ActionLink("Remove", "NewContactPerson", "Bank", new { bankId = Model.BankModel.ID, contactPersonId = cPM.ID }, new { @class = "btn btn-outline-danger " })</td>
+        </tr>
+        }
+
+        @using (Html.BeginForm("NewContactPerson", "Bank", FormMethod.Post))
+        {
+    <tr>
+        <th scope="row">Contact Person</th>
+        <td>@Html.TextBoxFor(t => t.ContactPersonModel.FirstName, new { @class = "form-control", placeHolder = "Firstname", required = "" }) </td>
+        <td>@Html.TextBoxFor(t => t.ContactPersonModel.LastName, new { @class = "form-control", placeHolder = "Lastname", required = "" }) </td>
+        <td>@Html.TextBoxFor(t => t.ContactPersonModel.DateOfBirth, new { @type = "date", @class = "form-control datepicker", required = "", placeHolder = "Date of birth" }) </td>
+        <td>@Html.DropDownListFor(d => d.ContactPersonModel.Position.ID, Model.PositionModels.Where(w => w.Name != "General Director").Select(p => new SelectListItem() { Text = p.Name, Value = p.ID.ToString() }).OrderBy(o => o.Text), new { @class = "form-control" })</td>
+        <td><input type="hidden" name="bankId" value="@Model.BankModel.ID" /></td>
+    </tr>
+            <tr>
+                <td colspan="5" style="text-align: right">
+                    <button type="submit" class="btn btn-outline-warning">New</button>
+                    @Html.ActionLink("Finish", "Index", "Home", null, new { @class = "btn btn-outline-success" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,39 @@
+﻿@using BankRegistry_MVC.Models;
+@model ViewModelItem
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div style="margin-top: 20px">
+    <div class="card mb-3 cardShadows" style="max-width: 50rem; margin-left: auto; margin-right: auto;">
+        <div class="card-header">New Bank</div>
+        <div class="card-body">
+            @using (Html.BeginForm("New", "Bank", FormMethod.Post))
+            {
+                <table class="table table-hover">
+                    <tbody>
+                        <tr>
+                            <th scope="row">Bank</th>
+                            <td>@Html.TextBoxFor(t => t.BankModel.Name, new { @class = "form-control", placeHolder = "Bank name", required = "" }) </td>
+                            <td>@Html.TextBoxFor(t => t.BankModel.URL, new { @class = "form-control", placeHolder = "Image Url" }) </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">General Director</th>
+                            <td>@Html.TextBoxFor(t => t.ContactPersonModel.FirstName, new { @class = "form-control", placeHolder = "Firstname", required = "" }) </td>
+                            <td>@Html.TextBoxFor(t => t.ContactPersonModel.LastName, new { @class = "form-control", placeHolder = "Lastname", required = "" }) </td>
+                            @*<td class="dateStyleTd">@Html.TextBoxFor(m => m.Day, new { @class = "form-control dateStyle", placeHolder = "dd", type="number" }) </td>
+                            <td class="dateStyleTd">@Html.TextBoxFor(m => m.Month, new { @class = "form-control dateStyle", placeHolder = "MM", type="number" }) </td>
+                            <td class="dateStyleTd">@Html.TextBoxFor(m => m.Year, new { @class = "form-control dateStyle", placeHolder = "yyyy", type="number" }) </td>*@
+                            <td>@Html.TextBoxFor(model => model.ContactPersonModel.DateOfBirth, new { @type = "date", @class = "form-control datepicker", required = "" })</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div style="text-align: right">
+                    <button type="submit" class="btn btn-outline-warning" style="margin-right: 5px">Next</button>
+                    @Html.ActionLink("Cancel", "Index", "Home", new { }, new { @class = "btn btn-outline-danger" })
+                </div>
+            }
+        </div>
+    </div>
+</div>

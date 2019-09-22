@@ -1,0 +1,66 @@
+﻿@using BankRegistry_MVC.Models
+@model ViewModelItem
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div style="margin-top: 20px; position: relative">
+    <div class="card border-warning mb-3 cardShadows" style="max-width: 50rem; margin-left: auto; margin-right: auto;">
+        @using (Html.BeginForm("Edit", "Bank", FormMethod.Post))
+        {
+            <div class="card-header">Edit Bank</div>
+            <div class="card-body editDiv">
+                <p class="text-info" style="margin: 0">Bank</p>
+                <div class="flexRowParent">
+                    <div class="flexChild">
+                        <img src="@Model.BankModel.URL" width="150" height="150" />
+                    </div>
+                    <div class="flexChild">
+                        <div class="form-group">
+                            @Html.HiddenFor(h => h.BankModel.ID)
+                            @Html.TextBoxFor(t => t.BankModel.Name, new { @class = "form-control", placeHolder = "Bank name" })
+                        </div>
+                        <div class="form-group">
+                            @Html.TextBoxFor(t => t.BankModel.URL, new { @class = "form-control", placeHolder = "Image Url" })
+                        </div>
+                    </div>
+                </div>
+                <p class="text-danger">General Director</p>
+                <div class="flexRowParent">
+                    <div class="flexChild">
+                        <div class="form-group">
+                            @Html.HiddenFor(h => h.ContactPersonModel.ID)
+                            @Html.TextBoxFor(t => t.ContactPersonModel.FirstName, new { @class = "form-control editInput", placeHolder = "Firstname" })
+                        </div>
+                    </div>
+                    <div class="flexChild">
+                        <div class="form-group">
+                            @Html.TextBoxFor(t => t.ContactPersonModel.LastName, new { @class = "form-control editInput", placeHolder = "Lastname" })
+                        </div>
+                    </div>
+                    <div class="flexChild">
+                        <div class="form-group">
+                            <input name="BirthDate" class="form-control editInput datepicker" required type="date" value="@string.Format("{0:yyyy-MM-dd}", Model.ContactPersonModel.DateOfBirth)">
+                            @*<input name="BirthDate" class = "form-control editInput datepicker" required type="date" value="@Model.ContactPersonModel.DateOfBirth.Year-@(Model.ContactPersonModel.DateOfBirth.Month.ToString().Length == 1 ? "0" + Model.ContactPersonModel.DateOfBirth.Month.ToString() : Model.ContactPersonModel.DateOfBirth.Month.ToString())-@Model.ContactPersonModel.DateOfBirth.Day">*@
+                        </div>
+                    </div>
+                </div>
+                @Html.ActionLink("Contact Persons", "NewContactPerson", "Bank", new { bankId = Model.BankModel.ID }, new { @class = "btn btn-outline-info btn-secondary btn-lg btn-block" })
+                @*<button type="button" class="btn btn-info btn-lg btn-block">Contact Persons</button>*@
+            </div>
+            <div style="margin: 10px; text-align: right;">
+                <button type="submit" class="btn btn-outline-success">Save</button>
+                @Html.ActionLink("Cancel", "Index", "Home", null, new { @class = "btn btn-outline-danger" })
+            </div>
+        }
+    </div>
+    @if (Model.FromPost)
+    {
+        <div class="customAlertContainer">
+            <div class="alert alert-dismissible alert-success">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>Well done!</strong> Changes have been saved.
+            </div>
+        </div>
+    }
+</div>

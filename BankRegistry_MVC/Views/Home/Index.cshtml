@@ -1,0 +1,38 @@
+﻿@using BankRegistry_MVC.Models;
+@model BankModelItem
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<table class="table table-hover">
+    <tbody>
+        @foreach (var m in Model.BankModels.Select((v, i) => new { v, i }))
+        {
+            <tr>
+                <th class="pointerOn" scope="row" style="text-align: center" onclick="window.location.href='@Url.Action("Edit", "Bank", new { bankId = m.v.ID })'">@(m.i + 1)</th>
+                <td class="pointerOn" onclick="window.location.href='@Url.Action("Edit", "Bank", new { bankId = m.v.ID })'">@m.v.Name</td>
+                <td class="pointerOn" style="text-align: center" onclick="window.location.href='@Url.Action("Edit", "Bank", new { bankId = m.v.ID })'"><img src="@m.v.URL" width="40" height="40" /></td>
+                <td class="btnRemove">@Html.ActionLink("Remove", "Index", "Home", new { id = m.v.ID }, new { @class = "btn btn-outline-danger " })</td>
+            </tr>
+        }
+        <tr>
+            <td style="text-align: center" colspan="4"><h5>@Html.ActionLink("+ Add New Bank", "New", "Bank", null, new { @class = "card-link" })</h5></td>
+        </tr>
+    </tbody>
+</table>
+
+@section SearchSection {
+    <div class="collapse navbar-collapse" id="navbarColor02">
+        <div style="margin-left: auto;">
+            <form class="form-inline my-2 my-lg-0">
+                @using (Html.BeginForm("Index", "Home"))
+                {
+                    <input class="form-control" id="txtSearch" name="text" placeholder="Search">
+                    <button class="btn btn-secondary my-2 my-sm-0" type="submit" style="margin: 0 5px">Search</button>
+                }
+            </form>
+        </div>
+    </div>
+}

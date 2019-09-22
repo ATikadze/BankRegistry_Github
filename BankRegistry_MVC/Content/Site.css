@@ -1,0 +1,106 @@
+﻿/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+tr > .btnRemove {
+    opacity: 0;
+    transition: 0.2s;
+    text-align: right;
+}
+
+tr:hover > .btnRemove {
+    opacity: 1;
+}
+
+.center {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.cardShadows {
+    transition: 0.2s;
+}
+
+.cardShadows:hover {
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 10px
+}
+
+.pointerOn:hover {
+    cursor: pointer;
+}
+
+.editDiv {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    display: block;
+}
+
+    .editDiv > * {
+        margin: 10px 0 10px 0;
+    }
+
+    .editDiv > div {
+        text-align: center;
+    }
+
+.flexRowParent {
+    display: flex;
+    flex-direction: row;
+}
+
+.flexChild {
+    flex-grow: 1;
+}
+
+input.editInput {
+    max-width: 250px;
+    margin: 0 5px;
+}
+
+.custom-card-link {
+    color: white;
+}
+
+    .custom-card-link:hover {
+        color: lightgrey;
+        text-decoration: none;
+    }
+
+td.dateStyleTd {
+    padding-right: 0;
+    padding-left: 0;
+}
+    
+input.dateStyle {
+    padding: 1px;
+    margin: 0;
+    max-width: 40px;
+    text-align: center;
+}
+
+.customAlertContainer {
+    top: 100%;
+    left: 105%;
+    width: 200px;
+    position: absolute;
+    transform: translate(-100%, -100%);
+}
